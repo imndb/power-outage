@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: Stromausfall API
+  description: API zur Übermittlung von Stromausfalldaten durch Netzbetreiber
+  version: 1.0.0
+servers:
+  - url: https://api.netzbetreiber.ch/v1
+    description: Produktionsserver
+
+paths:
+  /stromausfall:
+    post:
+      summary: Meldung eines Stromausfalls
+      description: Netzbetreiber melden Stromausfälle mit relevanten Informationen.
+      operationId: meldenStromausfall
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StromausfallMeldung'
+      responses:
+        '201':
+          description: Erfolgreich gemeldet
+        '400':
+          description: Ungültige Anfrage
+        '500':
+          description: Serverfehler
+    get:
+      summary: Liste aller Stromausfälle abrufen
+      description: Gibt eine Liste aller aktuellen Stromausfälle zurück.
+      operationId: getAllStromausfälle
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StromausfallMeldung'
+        '500':
+          description: Serverfehler
+
+  /stromausfall/{id}:
+    get:
+      summary: Einzelnen Stromausfall abrufen
+      description: Gibt die Details eines bestimmten Stromausfalls anhand der ID zurück.
+      operationId: getStromausfall
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Die eindeutige ID des Stromausfalls
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StromausfallMeldung'
+        '404':
+          description: Stromausfall nicht gefunden
+        '500':
+          description: Serverfehler
+
+components:
+  schemas:
+    StromausfallMeldung:
+      type: object
+      required:
+        - netzbetreiber
+        - störungstyp
+        - startzeit
+        - status
+        - betroffene_gebiete
+      properties:
+        id:
+          type: string
+          example: "12345"
+        netzbetreiber:
+          type: string
+          example: "BKW"
+        störungstyp:
+          type: string
+          enum: [Stromausfall, Spannungsschwankung, Geplante Wartung]
+          example: "Stromausfall"
+        beschreibung:
+          type: string
+          example: "Wir sind daran, die Störung zu beheben. Danke für Ihr Verständnis."
+        startzeit:
+          type: string
+          format: date-time
+          example: "2025-03-04T14:00:00Z"
+        voraussichtliches_ende:
+          type: string
+          format: date-time
+          example: "2025-03-04T18:00:00Z"
+        status:
+          type: string
+          enum: [in Bearbeitung, behoben, geplant]
+          example: "in Bearbeitung"
+        betroffene_gebiete:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Bern"
+              koordinaten:
+                type: object
+                properties:
+                  breitengrad:
+                    type: number
+                    format: float
+                    example: 46.9481
+                  längengrad:
+                    type: number
+                    format: float
+                    example: 7.4474
+        anzahl_betroffene_kunden:
+          type: integer
+          example: 5000
+        meldungsquelle:
+          type: string
+          example: "Automatisches Monitoring"
+        letzte_aktualisierung:
+          type: string
+          format: date-time
+          example: "2025-03-04T14:30:00Z"

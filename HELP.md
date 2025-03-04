@@ -1,8 +1,6 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'ch.be.datahackdays2025.power-outage' is invalid and this project uses 'ch.be.datahackdays2025.power_outage' instead.
-
 # Getting Started
 
 ### Reference Documentation

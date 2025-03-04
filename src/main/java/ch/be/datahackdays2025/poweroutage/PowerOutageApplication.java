@@ -1,4 +1,4 @@
-package ch.be.datahackdays2025.power_outage;
+package ch.be.datahackdays2025.poweroutage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
