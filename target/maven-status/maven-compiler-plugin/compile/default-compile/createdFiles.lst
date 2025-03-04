@@ -1,0 +1,13 @@
+ch\be\datahackdays2025\poweroutage\apispec\model\StromausfallMeldung$StrungstypEnum.class
+ch\be\datahackdays2025\poweroutage\apispec\api\StromausfallApi$1.class
+ch\be\datahackdays2025\poweroutage\apispec\api\StromausfallApi.class
+ch\be\datahackdays2025\poweroutage\apispec\model\StromausfallMeldung$StatusEnum.class
+ch\be\datahackdays2025\poweroutage\apispec\api\StromausfallApiDelegate.class
+ch\be\datahackdays2025\poweroutage\apispec\api\StromausfallApiController$1.class
+ch\be\datahackdays2025\poweroutage\apispec\api\ApiUtil.class
+ch\be\datahackdays2025\poweroutage\apispec\model\StromausfallMeldung.class
+ch\be\datahackdays2025\poweroutage\PowerOutageApplication.class
+ch\be\datahackdays2025\poweroutage\controller\OutageController.class
+ch\be\datahackdays2025\poweroutage\apispec\model\StromausfallMeldungBetroffeneGebieteInner.class
+ch\be\datahackdays2025\poweroutage\apispec\api\StromausfallApiController.class
+ch\be\datahackdays2025\poweroutage\apispec\model\StromausfallMeldungBetroffeneGebieteInnerKoordinaten.class

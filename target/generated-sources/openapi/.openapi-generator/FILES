@@ -1,0 +1,6 @@
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/api/ApiUtil.java
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/api/StromausfallApi.java
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/api/StromausfallApiDelegate.java
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/model/StromausfallMeldung.java
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/model/StromausfallMeldungBetroffeneGebieteInner.java
+src/main/java/ch/be/datahackdays2025/poweroutage/apispec/model/StromausfallMeldungBetroffeneGebieteInnerKoordinaten.java
