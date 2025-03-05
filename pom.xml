@@ -69,11 +69,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.14.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.2</version>
 			</plugin>
 
 			<plugin>
@@ -103,6 +109,7 @@
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 							<additionalProperties>
+								<skipDefaultApplication>true</skipDefaultApplication>
 								<skipDefaultModelImports>true</skipDefaultModelImports> <!-- Optional -->
 								<supportingFiles>false</supportingFiles> <!-- Deaktiviert andere Hilfsdateien -->
 							</additionalProperties>
