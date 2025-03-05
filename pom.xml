@@ -67,8 +67,21 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>ch.be.datahackdays2025.poweroutage.PowerOutageApplication</mainClass>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.openapitools</groupId>
@@ -80,23 +93,33 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-								${project.basedir}/src/main/resources/spec/outage-spec.yaml
-							</inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/spec/outage-spec.yaml</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>ch.be.datahackdays2025.poweroutage.apispec.api</apiPackage>
 							<modelPackage>ch.be.datahackdays2025.poweroutage.apispec.model</modelPackage>
-							<supportingFilesToGenerate>
-								ApiUtil.java
-							</supportingFilesToGenerate>
+							<output>${project.build.directory}/generated-sources/openapi</output>
 							<configOptions>
-								<delegatePattern>true</delegatePattern>
+								<dateLibrary>java23</dateLibrary>
+								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
+							<additionalProperties>
+								<skipDefaultModelImports>true</skipDefaultModelImports> <!-- Optional -->
+								<supportingFiles>false</supportingFiles> <!-- Deaktiviert andere Hilfsdateien -->
+							</additionalProperties>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>${project.build.directory}/generated-sources/openapi</directory>
+				<includes>
+					<include>**/*.java</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>
