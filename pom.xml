@@ -46,11 +46,13 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.7.0</version>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.4.0</version> <!-- Check for the latest version -->
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -61,6 +63,7 @@
 			<artifactId>jakarta.annotation-api</artifactId>
 			<version>2.1.1</version>
 		</dependency>
+
 
 	</dependencies>
 
