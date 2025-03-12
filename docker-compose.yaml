@@ -1,0 +1,27 @@
+version: '3.8'
+
+volumes:
+  mssql_data:
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_container
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "local!PASSWORD"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+
+  app:
+    build: .
+    container_name: power_outage
+    image: imndb/power_outage_map:latest
+    depends_on:
+      - mssql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://mssql:1433;databaseName=power_outage_db
