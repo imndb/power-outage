@@ -1,20 +1,19 @@
-version: '3.8'
-
 volumes:
-  mssql_data:
+  postgres_data:
 
 services:
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: mssql_container
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
     restart: always
     ports:
-      - "1433:1433"
+      - "5432:5432"
     environment:
-      SA_PASSWORD: "local!PASSWORD"
-      ACCEPT_EULA: "Y"
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
     volumes:
-      - mssql_data:/var/opt/mssql
+      - postgres_data:/var/lib/postgresql/data
 
 
   app:
@@ -22,6 +21,8 @@ services:
     container_name: power_outage
     image: imndb/power_outage_map:latest
     depends_on:
-      - mssql
+      - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://mssql:1433;databaseName=power_outage_db
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/postgres"
+      SPRING_DATASOURCE_USERNAME: "user"
+      SPRING_DATASOURCE_PASSWORD: "password"
