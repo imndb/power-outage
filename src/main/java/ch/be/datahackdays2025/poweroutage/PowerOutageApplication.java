@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "ch.be.datahackdays2025.poweroutage.repository")
-@ComponentScan(basePackages = "ch.be.datahackdays2025.poweroutage")
-@EntityScan("ch.be.datahackdays2025.poweroutage.entity")
+@EnableJpaRepositories
+@ComponentScan
+@EntityScan
 public class PowerOutageApplication {
 
 	public static void main(String[] args) {

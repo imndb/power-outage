@@ -29,7 +29,7 @@ public class DataSourceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("ch.be.datahackdays2025.poweroutage.entity.PowerOutage"); // Replace with your entity package
+        em.setPackagesToScan("ch.be.datahackdays2025.poweroutage.entity");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
@@ -40,7 +40,7 @@ public class DataSourceConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("spring.jpa.hibernate.ddl-auto", "none");
+        properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
 
 
         return properties;
