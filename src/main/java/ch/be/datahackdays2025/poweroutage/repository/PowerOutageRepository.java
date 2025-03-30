@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface poweroutageRepository extends JpaRepository<Poweroutage, Long> {
+public interface PowerOutageRepository extends JpaRepository<Poweroutage, Long> {
 
 }

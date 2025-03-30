@@ -1,108 +1,108 @@
 openapi: 3.0.0
 info:
-  title: Stromausfall API
-  description: API zur Übermittlung von Stromausfalldaten durch Netzbetreiber
+  title: Power Outage API
+  description: API for transmitting power outage data by grid operators
   version: 1.0.0
 servers:
-  - url: https://api.netzbetreiber.ch/v1
-    description: Produktionsserver
+  - url: https://api.gridoperator.ch/v1
+    description: Production server
 
 paths:
-  /stromausfall:
+  /poweroutage:
     post:
-      summary: Meldung eines Stromausfalls
-      description: Netzbetreiber melden Stromausfälle mit relevanten Informationen.
-      operationId: meldenStromausfall
+      summary: Report a power outage
+      description: Grid operators report power outages with relevant information.
+      operationId: reportPowerOutage
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StromausfallMeldung'
+              $ref: '#/components/schemas/PowerOutageReport'
       responses:
         '201':
-          description: Erfolgreich gemeldet
+          description: Successfully reported
         '400':
-          description: Ungültige Anfrage
+          description: Invalid request
         '500':
-          description: Serverfehler
+          description: Server error
     get:
-      summary: Liste aller Stromausfälle abrufen
-      description: Gibt eine Liste aller aktuellen Stromausfälle zurück.
-      operationId: getAllStromausfälle
+      summary: Retrieve a list of all power outages
+      description: Returns a list of all current power outages.
+      operationId: getAllPowerOutages
       responses:
         '200':
-          description: Erfolgreiche Antwort
+          description: Successful response
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StromausfallMeldung'
+                  $ref: '#/components/schemas/PowerOutageReport'
         '500':
-          description: Serverfehler
+          description: Server error
 
-  /stromausfall/{id}:
+  /poweroutage/{id}:
     get:
-      summary: Einzelnen Stromausfall abrufen
-      description: Gibt die Details eines bestimmten Stromausfalls anhand der ID zurück.
-      operationId: getStromausfall
+      summary: Retrieve a specific power outage
+      description: Returns the details of a specific power outage based on its ID.
+      operationId: getPowerOutage
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          description: Die eindeutige ID des Stromausfalls
+          description: The unique ID of the power outage
       responses:
         '200':
-          description: Erfolgreiche Antwort
+          description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StromausfallMeldung'
+                $ref: '#/components/schemas/PowerOutageReport'
         '404':
-          description: Stromausfall nicht gefunden
+          description: Power outage not found
         '500':
-          description: Serverfehler
+          description: Server error
 
 components:
   schemas:
-    StromausfallMeldung:
+    PowerOutageReport:
       type: object
       required:
-        - netzbetreiber
-        - störungstyp
-        - startzeit
+        - grid_operator
+        - outage_type
+        - start_time
         - status
-        - betroffene_gebiete
+        - affected_areas
       properties:
         id:
           type: string
           example: "12345"
-        netzbetreiber:
+        grid_operator:
           type: string
           example: "BKW"
-        störungstyp:
+        outage_type:
           type: string
-          enum: [Stromausfall, Spannungsschwankung, Geplante Wartung]
-          example: "Stromausfall"
-        beschreibung:
+          enum: [Power Outage, Voltage Fluctuation, Planned Maintenance]
+          example: "Power Outage"
+        description:
           type: string
-          example: "Wir sind daran, die Störung zu beheben. Danke für Ihr Verständnis."
-        startzeit:
+          example: "We are working to resolve the issue. Thank you for your understanding."
+        start_time:
           type: string
           format: date-time
           example: "2025-03-04T14:00:00Z"
-        voraussichtliches_ende:
+        estimated_end:
           type: string
           format: date-time
           example: "2025-03-04T18:00:00Z"
         status:
           type: string
-          enum: [in Bearbeitung, behoben, geplant]
-          example: "in Bearbeitung"
-        betroffene_gebiete:
+          enum: [In Progress, Resolved, Planned]
+          example: "In Progress"
+        affected_areas:
           type: array
           items:
             type: object
@@ -110,24 +110,24 @@ components:
               name:
                 type: string
                 example: "Bern"
-              koordinaten:
+              coordinates:
                 type: object
                 properties:
-                  breitengrad:
+                  latitude:
                     type: number
                     format: float
                     example: 46.9481
-                  längengrad:
+                  longitude:
                     type: number
                     format: float
                     example: 7.4474
-        anzahl_betroffene_kunden:
+        affected_customers:
           type: integer
           example: 5000
-        meldungsquelle:
+        report_source:
           type: string
-          example: "Automatisches Monitoring"
-        letzte_aktualisierung:
+          example: "Automated Monitoring"
+        last_update:
           type: string
           format: date-time
           example: "2025-03-04T14:30:00Z"

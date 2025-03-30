@@ -40,9 +40,7 @@ public class DataSourceConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("spring.jpa.hibernate.ddl-auto", "update");
-
-
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
 }
