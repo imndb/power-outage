@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Profile({"!test"}) // Exclude this bean when the "test" profile is active
+@Profile("!test")
 public class DataSourceConfig {
 
     @Bean
