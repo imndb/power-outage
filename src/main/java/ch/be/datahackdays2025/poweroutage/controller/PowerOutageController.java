@@ -10,17 +10,20 @@ import java.util.List;
 
 
 @RestController
-public class OutageController implements ch.be.datahackdays2025.poweroutage.apispec.api.PoweroutageApi {
+public class PowerOutageController implements ch.be.datahackdays2025.poweroutage.apispec.api.PoweroutageApi {
 
-    private PowerOutageRepository powerOutageRepository;
+    private final PowerOutageRepository powerOutageRepository;
 
-    public OutageController(PowerOutageRepository powerOutageRepository) {
+    public PowerOutageController(PowerOutageRepository powerOutageRepository) {
         this.powerOutageRepository = powerOutageRepository;
     }
 
     @Override
     public ResponseEntity<Void> reportPowerOutage(PowerOutageReport powerOutageReport) {
-        Poweroutage entity = Poweroutage.builder().location("loc").status("easy").build();
+        Poweroutage entity = Poweroutage.builder()
+                .location(powerOutageReport.getAffectedAreas().getFirst().getCoordinates().getLatitude().toString()).
+                status(powerOutageReport.getStatus().toString())
+                .build();
         powerOutageRepository.save(entity);
         return ResponseEntity.ok().build();
     }

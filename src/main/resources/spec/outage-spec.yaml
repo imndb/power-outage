@@ -94,6 +94,9 @@ components:
           type: string
           format: date-time
           example: "2025-03-04T14:00:00Z"
+          description: "The start time of the outage (ISO 8601 format)."
+          minimum: "2000-01-01T00:00:00Z"
+          maximum: "2100-01-01T00:00:00Z"
         estimated_end:
           type: string
           format: date-time
