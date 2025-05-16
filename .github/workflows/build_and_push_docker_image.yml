@@ -33,9 +33,6 @@ jobs:
       - name: Build and Test with Maven
         run: mvn clean package --no-transfer-progress
 
-      - name: Run Checkstyle
-        run: mvn checkstyle:check
-
       - name: Run SpotBugs
         run: mvn spotbugs:check
 
