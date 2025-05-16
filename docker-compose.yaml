@@ -19,10 +19,10 @@ services:
   app:
     build: .
     container_name: power_outage
-    image: imndb/power_outage_map:latest
+    image: imndb/power_outage:latest
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://localhost:5432/mydatabase"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/mydatabase"
       SPRING_DATASOURCE_USERNAME: "user"
       SPRING_DATASOURCE_PASSWORD: "password"

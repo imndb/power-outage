@@ -1,6 +1,12 @@
 # Read Me First
 The following was discovered as part of building this project:
 
+
+Swagger Local Url:
+
+http://localhost:8080/swagger-ui/index.html
+
+
 # Getting Started
 
 ### Reference Documentation

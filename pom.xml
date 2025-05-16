@@ -27,7 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -132,7 +132,7 @@
 							<modelPackage>ch.be.datahackdays2025.poweroutage.apispec.model</modelPackage>
 							<output>${project.build.directory}/generated-sources/openapi</output>
 							<configOptions>
-								<dateLibrary>java21</dateLibrary>
+								<dateLibrary>java17</dateLibrary>
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 							<additionalProperties>
