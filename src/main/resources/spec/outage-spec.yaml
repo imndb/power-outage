@@ -65,6 +65,54 @@ paths:
           description: Power outage not found
         '500':
           description: Server error
+    put:
+      summary: Update a specific power outage
+      description: Updates the details of a specific power outage based on its ID.
+      operationId: updatePowerOutage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique ID of the power outage to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerOutageReport'
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerOutageReport'
+        '400':
+          description: Invalid request
+        '404':
+          description: Power outage not found
+        '500':
+          description: Server error
+    delete:
+      summary: Delete a specific power outage
+      description: Deletes a specific power outage based on its ID.
+      operationId: deletePowerOutage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique ID of the power outage to delete
+      responses:
+        '204':
+          description: Successfully deleted
+        '404':
+          description: Power outage not found
+        '500':
+          description: Server error
 
 components:
   schemas:
@@ -85,8 +133,7 @@ components:
           example: "BKW"
         outage_type:
           type: string
-          enum: [Power Outage, Voltage Fluctuation, Planned Maintenance]
-          example: "Power Outage"
+          example: "Power_Outage"
         description:
           type: string
           example: "We are working to resolve the issue. Thank you for your understanding."
@@ -103,8 +150,7 @@ components:
           example: "2025-03-04T18:00:00Z"
         status:
           type: string
-          enum: [In Progress, Resolved, Planned]
-          example: "In Progress"
+          example: "In_Progress"
         affected_areas:
           type: array
           items:

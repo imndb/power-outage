@@ -28,9 +28,8 @@ public class PowerOutageRestControllerTest {
 
         // add report
         ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport powerOutageReport = new PowerOutageReport();
-        powerOutageReport.setOutageType(PowerOutageReport.OutageTypeEnum.POWER_OUTAGE);
         powerOutageReport.description("ausfall");
-        powerOutageReport.setStatus(PowerOutageReport.StatusEnum.IN_PROGRESS);
+        powerOutageReport.setStatus("IN_PROGRESS");
         PowerOutageReportAffectedAreasInner affectedAreasInner = new PowerOutageReportAffectedAreasInner();
         affectedAreasInner.setName("bern");
         affectedAreasInner.setCoordinates(new PowerOutageReportAffectedAreasInnerCoordinates().latitude(325.7f));
@@ -41,6 +40,7 @@ public class PowerOutageRestControllerTest {
         powerOutageReport.setDescription("description");
         powerOutageReport.setGridOperator("operator");
         powerOutageReport.setStartTime(new Date());
+        powerOutageReport.setOutageType("PLANNED_MAINTENANCE");
 
 
         WebTestClient.ResponseSpec response = webTestClient.post().uri("/poweroutage")
