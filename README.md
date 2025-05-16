@@ -12,3 +12,8 @@ Bereitstellen einer Schnittstelle (SOAP, …) für die Datenanlieferung der Netz
 
 
 https://hack.data-hackdays-be.ch/project/55
+
+
+Beispiel Client: 
+
+https://github.com/idabbaghi2/power-outage-client
