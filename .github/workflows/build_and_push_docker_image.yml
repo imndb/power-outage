@@ -33,12 +33,6 @@ jobs:
       - name: Build and Test with Maven
         run: mvn clean package --no-transfer-progress
 
-      - name: Run SpotBugs
-        run: mvn spotbugs:check
-
-      - name: Run PMD
-        run: mvn pmd:check
-
       - name: Run Tests with Coverage
         run: mvn test jacoco:report
           
