@@ -21,7 +21,7 @@ public class PowerOutageController implements ch.be.datahackdays2025.poweroutage
     @Override
     public ResponseEntity<Void> reportPowerOutage(PowerOutageReport powerOutageReport) {
         Poweroutage entity = Poweroutage.builder()
-                .location(powerOutageReport.getAffectedAreas().getFirst().getCoordinates().getLatitude().toString()).
+                .location(powerOutageReport.getAffectedAreas().get(0).getCoordinates().getLatitude().toString()).
                 status(powerOutageReport.getStatus().toString())
                 .build();
         powerOutageRepository.save(entity);
