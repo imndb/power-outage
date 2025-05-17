@@ -3,7 +3,6 @@ package ch.be.datahackdays2025.poweroutage.config;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInner;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInnerCoordinates;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -11,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +25,7 @@ public class PowerOutageRestControllerTest {
 
 
     @Test
-    @Disabled
-    public  void testAddPowerOutageReport() {
+    public void testAddPowerOutageReport() {
 
         // add report
         ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport powerOutageReport = new PowerOutageReport();
@@ -34,6 +33,8 @@ public class PowerOutageRestControllerTest {
         powerOutageReport.setStatus("IN_PROGRESS");
         PowerOutageReportAffectedAreasInner affectedAreasInner = new PowerOutageReportAffectedAreasInner();
         affectedAreasInner.setName("bern");
+        affectedAreasInner.setPlace("bern-innen");
+        affectedAreasInner.setSubPlace("Zytggen");
         affectedAreasInner.setCoordinates(new PowerOutageReportAffectedAreasInnerCoordinates().latitude(325.7f));
         List<ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInner> affectedAreasInners =
                 Collections.singletonList(affectedAreasInner);
@@ -41,18 +42,22 @@ public class PowerOutageRestControllerTest {
         powerOutageReport.setReportSource("report_source");
         powerOutageReport.setDescription("description");
         powerOutageReport.setGridOperator("operator");
-        powerOutageReport.setStartTime(new Date());
+        powerOutageReport.setStartTime(Date.from(Instant.now()));
+
         powerOutageReport.setOutageType("PLANNED_MAINTENANCE");
 
+        // configure Basic Auth
+        WebTestClient webTestClientWithAuth = webTestClient.mutate()
+                .defaultHeaders(headers -> headers.setBasicAuth("bkw", "bkw123"))
+                .build();
 
-        WebTestClient.ResponseSpec response = webTestClient.post().uri("/poweroutage")
+        WebTestClient.ResponseSpec response = webTestClientWithAuth.post().uri("/poweroutage")
                 .bodyValue(powerOutageReport)
                 .exchange();
         response.expectStatus().isOk();
 
-
         // check list
-        WebTestClient.ResponseSpec getResponse = webTestClient.get().uri("/poweroutage")
+        WebTestClient.ResponseSpec getResponse = webTestClientWithAuth.get().uri("/poweroutage")
                 .exchange();
         getResponse.expectStatus().isOk();
         // TODO verify the content getResponse.expectBodyList(ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport.class)
