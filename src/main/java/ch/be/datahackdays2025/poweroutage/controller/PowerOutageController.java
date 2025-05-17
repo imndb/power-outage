@@ -1,6 +1,5 @@
 package ch.be.datahackdays2025.poweroutage.controller;
 
-import ch.be.datahackdays2025.poweroutage.apispec.api.PoweroutageApi;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInner;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInnerCoordinates;
@@ -11,7 +10,6 @@ import ch.be.datahackdays2025.poweroutage.repository.PowerOutageRepository;
 import ch.be.datahackdays2025.poweroutage.service.EmailService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
