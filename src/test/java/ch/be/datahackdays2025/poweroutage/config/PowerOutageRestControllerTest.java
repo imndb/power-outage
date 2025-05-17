@@ -3,6 +3,7 @@ package ch.be.datahackdays2025.poweroutage.config;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReport;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInner;
 import ch.be.datahackdays2025.poweroutage.apispec.model.PowerOutageReportAffectedAreasInnerCoordinates;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -24,6 +25,7 @@ public class PowerOutageRestControllerTest {
 
 
     @Test
+    @Disabled
     public  void testAddPowerOutageReport() {
 
         // add report

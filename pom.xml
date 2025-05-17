@@ -146,6 +146,7 @@
 								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 							<additionalProperties>
+								<skipTests>true</skipTests>
 								<skipDefaultApplication>true</skipDefaultApplication>
 								<skipDefaultModelImports>true</skipDefaultModelImports> <!-- Optional -->
 								<supportingFiles>false</supportingFiles> <!-- Deaktiviert andere Hilfsdateien -->
