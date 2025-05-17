@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: power-outage
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: public
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: email@gmail.com
+    password: 789789
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: TRACE
+        orm:
+          jdbc:
+            bind: TRACE
+      springdoc: TRACE
