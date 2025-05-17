@@ -49,6 +49,8 @@ public class PowerOutageController implements ch.be.datahackdays2025.poweroutage
         return affectedAreas.stream()
                 .map(area -> AffectedArea.builder()
                         .name(area.getName())
+                        .place(area.getPlace())
+                        .subPlace(area.getSubPlace())
                         .coordinates(converCoordinates(area.getCoordinates()))
                         .build())
                 .collect(Collectors.toCollection(ArrayList::new)); // Sicherstellen, dass die Liste veränderlich ist

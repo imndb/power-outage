@@ -41,6 +41,8 @@ public class ReportConverter {
     private static PowerOutageReportAffectedAreasInner fromAffectedArea(AffectedArea area) {
         PowerOutageReportAffectedAreasInner affectedArea = new PowerOutageReportAffectedAreasInner();
         affectedArea.setName(area.getName());
+        affectedArea.setPlace(area.getPlace());
+        affectedArea.setSubPlace(area.getSubPlace());
         PowerOutageReportAffectedAreasInnerCoordinates coordinates = new PowerOutageReportAffectedAreasInnerCoordinates();
         coordinates.setLatitude(area.getCoordinates().getLatitude());
         coordinates.setLongitude(area.getCoordinates().getLongitude());

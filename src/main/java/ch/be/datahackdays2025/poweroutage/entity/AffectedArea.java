@@ -12,6 +12,8 @@ import lombok.*;
 @Builder
 public class AffectedArea {
     private String name;
+    private String place;
+    private String subPlace;
 
     @Embedded
     private Coordinates coordinates;

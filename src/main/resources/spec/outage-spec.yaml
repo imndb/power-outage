@@ -159,6 +159,12 @@ components:
               name:
                 type: string
                 example: "Bern"
+              place:
+                type: string
+                example: "Bern-Innenstadt"
+              subPlace:
+                type: string
+                example: "Altstadt-Mattenhof"
               coordinates:
                 type: object
                 properties:
