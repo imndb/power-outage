@@ -17,3 +17,22 @@ https://hack.data-hackdays-be.ch/project/55
 Beispiel React Client: 
 
 https://github.com/idabbaghi2/power-outage-react-client
+
+
+Anleitung Deployment Local mit docker -> docker-compose.yaml:
+
+1- Docker-Desktop installieren und starten
+2- Projekt clonen
+3- im root vom Projekt: docker compose up
+4- swagger soll so verfügbar sein: http://localhost:8080/swagger-ui/index.html
+
+
+
+Anleitung Deployment Local mit docker -> kubernetes:
+
+1- Docker Desktop Installieren und starten
+2- in Settings Kubernetes aktivieren
+3- kubectl installieren 
+4- kubectl config use-context docker-desktop
+5- im Project diesen Befehl ausführen: kubectl apply -f src/main/resources/k8s/deployment.yaml
+6- swagger soll so verfügbar sein: http://localhost:31295/swagger-ui/index.html
