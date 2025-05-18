@@ -35,4 +35,5 @@ Anleitung Deployment Local mit docker -> kubernetes:
 3- kubectl installieren 
 4- kubectl config use-context docker-desktop
 5- im Project diesen Befehl ausführen: kubectl apply -f src/main/resources/k8s/deployment.yaml
-6- swagger soll so verfügbar sein: http://localhost:31295/swagger-ui/index.html
+6- port herausfinden, steht hier nach 80:   kubectl get service | grep 80:
+7- swagger soll so verfügbar sein: http://localhost:port/swagger-ui/index.html
