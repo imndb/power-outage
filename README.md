@@ -7,7 +7,7 @@ Meldungen über einen Stromausfall werden zur Zeit meist via Bürger gemeldet. D
 
 - Erstellung einer aktuellen Lagekarte des Kantons Bern mit den Stromausfällen sämtlicher Stromversorger.
 - Bei einer Störung mit Folgen für die Bevölkerung soll umgehend (1-2 Minuten) eine Meldung via E-Mail an die Notrufzentralen erfolgen.
-- Bereitstellen einer Schnittstelle (SOAP, …) für die Datenanlieferung der Netzbetreiber.
+- Bereitstellen einer REST Schnittstelle für die Datenanlieferung der Netzbetreiber.
 
 Weitere Details: [Hack Data Hackdays BE Projekt](https://hack.data-hackdays-be.ch/project/55)
 
