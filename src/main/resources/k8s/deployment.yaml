@@ -1,30 +1,16 @@
-apiVersion: apps/v1
-kind: Deployment
+# PostgreSQL PersistentVolumeClaim
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: power-outage-app
+  name: postgres-pvc
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: power-outage
-  template:
-    metadata:
-      labels:
-        app: power-outage
-    spec:
-      containers:
-        - image: imndb/power_outage:latest
-          name: power-outage
-          ports:
-            - containerPort: 8080
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/mydatabase
-            - name: SPRING_DATASOURCE_USERNAME
-              value: user
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
+# PostgreSQL Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,8 +26,8 @@ spec:
         app: postgres
     spec:
       containers:
-        - image: postgres:latest
-          name: postgres
+        - name: postgres
+          image: postgres:latest
           ports:
             - containerPort: 5432
           env:
@@ -52,12 +38,14 @@ spec:
             - name: POSTGRES_DB
               value: mydatabase
           volumeMounts:
-            - name: postgres-data
+            - name: postgres-storage
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: postgres-data
-          emptyDir: {}
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
 ---
+# PostgreSQL Service (internal only)
 apiVersion: v1
 kind: Service
 metadata:
@@ -70,3 +58,45 @@ spec:
       port: 5432
       targetPort: 5432
   type: ClusterIP
+---
+# Spring Boot App Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: power-outage-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: power-outage
+  template:
+    metadata:
+      labels:
+        app: power-outage
+    spec:
+      containers:
+        - name: power-outage
+          image: imndb/power_outage:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/mydatabase
+            - name: SPRING_DATASOURCE_USERNAME
+              value: user
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: password
+---
+# Spring Boot Service (external access via NodePort)
+apiVersion: v1
+kind: Service
+metadata:
+  name: power-outage-service
+spec:
+  selector:
+    app: power-outage
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
