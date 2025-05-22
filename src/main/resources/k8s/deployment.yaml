@@ -34,7 +34,10 @@ spec:
             - name: POSTGRES_USER
               value: user
             - name: POSTGRES_PASSWORD
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               value: mydatabase
           volumeMounts:
@@ -44,6 +47,15 @@ spec:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: postgres-pvc
+---
+# PostgreSQL Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  POSTGRES_PASSWORD: cGFzc3dvcmQxMjM=
 ---
 # PostgreSQL Service (internal only)
 apiVersion: v1
@@ -85,7 +97,10 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: user
             - name: SPRING_DATASOURCE_PASSWORD
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
 ---
 # Spring Boot Service (external access via NodePort)
 apiVersion: v1
