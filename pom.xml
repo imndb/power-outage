@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.4.0</version> <!-- Check for the latest version -->
+			<version>2.8.8</version> <!-- Check for the latest version -->
 		</dependency>
 
 		<dependency>
@@ -129,7 +129,7 @@
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.8.0</version>
+				<version>7.13.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -144,12 +144,14 @@
 							<configOptions>
 								<dateLibrary>java17</dateLibrary>
 								<useJakartaEe>true</useJakartaEe>
+								<interfaceOnly>true</interfaceOnly> <!-- generates interfaces only, no controller impls -->
 							</configOptions>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
 							<additionalProperties>
-								<skipTests>true</skipTests>
 								<skipDefaultApplication>true</skipDefaultApplication>
-								<skipDefaultModelImports>true</skipDefaultModelImports> <!-- Optional -->
-								<supportingFiles>false</supportingFiles> <!-- Deaktiviert andere Hilfsdateien -->
+								<skipDefaultModelImports>true</skipDefaultModelImports>
+								<supportingFiles>false</supportingFiles>
 							</additionalProperties>
 						</configuration>
 					</execution>

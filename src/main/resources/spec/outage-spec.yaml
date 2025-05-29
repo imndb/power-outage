@@ -3,9 +3,6 @@ info:
   title: Power Outage API
   description: API for transmitting power outage data by grid operators
   version: 1.0.0
-servers:
-  - url: https://api.gridoperator.ch/v1
-    description: Production server
 
 paths:
   /poweroutage:
