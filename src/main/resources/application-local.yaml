@@ -2,14 +2,17 @@ spring:
   application:
     name: power-outage
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      dialect: org.hibernate.dialect.H2Dialect
-      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -44,3 +47,4 @@ logging:
           jdbc:
             bind: TRACE
       springdoc: TRACE
+

@@ -1,12 +1,11 @@
-package ch.be.datahackdays2025.poweroutage.config;
+package ch.be.datahackdays2025.poweroutage.service.email;
 
-import ch.be.datahackdays2025.poweroutage.service.email.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@Profile({"test", "local"})
+@Profile({"local"})
 @Slf4j
 public class EmailServiceMock implements EmailService {
     @Override

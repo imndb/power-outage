@@ -1,4 +1,4 @@
-package ch.be.datahackdays2025.poweroutage.service;
+package ch.be.datahackdays2025.poweroutage.service.email;
 
 public interface EmailService {
 

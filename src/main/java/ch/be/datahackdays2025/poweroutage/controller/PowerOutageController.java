@@ -7,7 +7,7 @@ import ch.be.datahackdays2025.poweroutage.entity.AffectedArea;
 import ch.be.datahackdays2025.poweroutage.entity.Coordinates;
 import ch.be.datahackdays2025.poweroutage.entity.Poweroutage;
 import ch.be.datahackdays2025.poweroutage.repository.PowerOutageRepository;
-import ch.be.datahackdays2025.poweroutage.service.EmailService;
+import ch.be.datahackdays2025.poweroutage.service.email.EmailService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
