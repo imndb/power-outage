@@ -10,6 +10,7 @@ import ch.be.datahackdays2025.poweroutage.repository.PowerOutageRepository;
 import ch.be.datahackdays2025.poweroutage.service.email.EmailService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,8 @@ public class PowerOutageController implements ch.be.datahackdays2025.poweroutage
 
     private final EmailService emailService;
 
-    private final String mailTo = "BeispielReciever@gmail.com";
+    @Value("${spring.mail.target-mail}")
+    private  String mailTo;
 
 
     public PowerOutageController(PowerOutageRepository powerOutageRepository, EmailService emailService) {
